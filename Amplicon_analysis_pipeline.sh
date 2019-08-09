@@ -457,7 +457,13 @@ fi
 		export REF_DATA_PATH="${REF_DATA_PATH:-$DIR}"
 		echo "Expecting reference databases under $REF_DATA_PATH"
 	
-		if [[ -n $SILVA ]]; then 
+		if [[ $PIPELINE == "DADA2" ]]; then 
+
+				echo "Reference database: Silva_123" >> $LOG;
+				#Silva
+				export CORE="$REF_DATA_PATH/SILVA/SILVA123_QIIME_release/core_alignment/core_alignment_SILVA123.fasta"
+
+		elif [[ -n $SILVA ]]; then 
 
 				echo "Reference database: Silva_123" >> $LOG;
 				#Silva
@@ -522,8 +528,7 @@ fi
 		    "VSEARCH")
 			source $DIR/VSEARCH.sh
 			;;
-			"DADA2")
-			export CORE="$REF_DATA_PATH/SILVA/SILVA123_QIIME_release/core_alignment/core_alignment_SILVA123.fasta"
+		    "DADA2")
 			source $DIR/DADA2.sh
 			;;
 		    *)
